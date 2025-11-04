@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>God's Will - Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --teal: #4dbbc4;
+            --teal-dark: #3a9ba3;
+            --dark-blue: #2c3e50;
+            --darker-blue: #1e2d3d;
+        }
+
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        background: #f5f7fa;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        width: 280px;
+        height: 100vh;
+        background: linear-gradient(180deg, #2c3e50 0%, #1e3a4a 100%);
+        position: fixed;
+        left: 0;
+        top: 0;
+        padding: 30px 0;
+        z-index: 1000;
+    }
+
+    .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 0 30px;
+        margin-bottom: 40px;
+    }
+
+    .logo-icon {
+        width: 50px;
+        height: 50px;
+        background: var(--teal);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+    }
+
+    .logo-text {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: white;
+    }
+
+    .sidebar-menu {
+        list-style: none;
+    }
+
+    .sidebar-menu li {
+        margin-bottom: 5px;
+    }
+
+    .sidebar-menu a {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 15px 30px;
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1.1rem;
+        transition: all 0.3s;
+        position: relative;
+    }
+
+    .sidebar-menu a:hover {
+        color: white;
+        background: rgba(77, 187, 196, 0.1);
+    }
+
+    .sidebar-menu a.active {
+        color: white;
+        background: var(--teal);
+    }
+
+    .sidebar-menu a i {
+        font-size: 1.3rem;
+    }
+
+    /* Main Content */
+    .main-content {
+        margin-left: 280px;
+        padding: 40px;
+        min-height: 100vh;
+    }
+
+    /* Mobile Bottom Nav */
+    .mobile-bottom-nav {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        padding: 10px 0;
+        z-index: 1000;
+    }
+
+    .bottom-nav-items {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .bottom-nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        color: #9ca3af;
+        text-decoration: none;
+        font-size: 0.75rem;
+        transition: color 0.3s;
+    }
+
+    .bottom-nav-item.active {
+        color: var(--teal);
+    }
+
+    .bottom-nav-item i {
+        font-size: 1.5rem;
+    }
+
+    /* Dashboard Header */
+    .dashboard-header {
+        margin-bottom: 30px;
+    }
+
+    .dashboard-header h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #2d3748;
+    }
+
+    /* Quick Actions */
+    .quick-actions {
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .quick-actions h3 {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #2d3748;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .btn-new-interview {
+        background: var(--teal);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 12px 30px;
+        font-weight: 600;
+        transition: all 0.3s;
+    }
+
+    .btn-new-interview:hover {
+        background: var(--teal-dark);
+        transform: translateY(-2px);
+    }
+
+    .btn-view-feedback {
+        background: white;
+        color: var(--teal);
+        border: 2px solid var(--teal);
+        border-radius: 12px;
+        padding: 12px 30px;
+        font-weight: 600;
+        transition: all 0.3s;
+    }
+
+    .btn-view-feedback:hover {
+        background: var(--teal);
+        color: white;
+    }
+
+    /* Dashboard Grid */
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        margin-bottom: 30px;
+    }
+
+    /* Card Styles */
+    .dashboard-card {
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .card-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 25px;
+        color: #2d3748;
+    }
+
+    /* Recent Interviews */
+    .interviews-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .interview-card {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        border-radius: 15px;
+        padding: 20px;
+        color: white;
+        transition: all 0.3s;
+    }
+
+    .interview-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(77, 187, 196, 0.3);
+    }
+
+    .interview-date {
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 10px;
+    }
+
+    .interview-role {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+
+    .interview-score {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .fire-emoji {
+        font-size: 1.5rem;
+        display: inline-block;
+        animation: flicker 1.5s ease-in-out infinite;
+    }
+
+    @keyframes flicker {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.8; }
+    }
+
+    .btn-view-details {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        width: 100%;
+        margin-top: 10px;
+        transition: all 0.3s;
+    }
+
+    .btn-view-details:hover {
+        background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Progress Chart */
+    .progress-chart {
+        background: linear-gradient(135deg, rgba(77, 187, 196, 0.1) 0%, rgba(77, 187, 196, 0.05) 100%);
+        border-radius: 15px;
+        padding: 30px;
+        text-align: center;
+    }
+
+    .chart-placeholder {
+        width: 200px;
+        height: 200px;
+        margin: 0 auto 20px;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120"><polyline points="10,100 40,80 70,60 100,40 130,50 160,20" fill="none" stroke="%234dbbc4" stroke-width="3"/><polyline points="10,100 40,80 70,60 100,40 130,50 160,20 160,120 10,120" fill="%234dbbc4" opacity="0.2"/><circle cx="10" cy="100" r="4" fill="%234dbbc4"/><circle cx="40" cy="80" r="4" fill="%234dbbc4"/><circle cx="70" cy="60" r="4" fill="%234dbbc4"/><circle cx="100" cy="40" r="4" fill="%234dbbc4"/><circle cx="130" cy="50" r="4" fill="%234dbbc4"/><circle cx="160" cy="20" r="4" fill="%234dbbc4"/></svg>');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .chart-label {
+        color: #718096;
+        font-size: 1rem;
+    }
+
+    /* Performance Graph (Desktop) */
+    .performance-graph {
+        text-align: center;
+    }
+
+    .radar-chart {
+        width: 300px;
+        height: 300px;
+        margin: 0 auto 20px;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><circle cx="150" cy="150" r="120" fill="none" stroke="%23e2e8f0" stroke-width="1"/><circle cx="150" cy="150" r="80" fill="none" stroke="%23e2e8f0" stroke-width="1"/><circle cx="150" cy="150" r="40" fill="none" stroke="%23e2e8f0" stroke-width="1"/><path d="M 150 30 L 150 150 L 270 150 L 150 270 L 30 150 Z" fill="%234dbbc4" opacity="0.3" stroke="%234dbbc4" stroke-width="2"/><text x="150" y="20" text-anchor="middle" fill="%23718096" font-size="12">550%</text><text x="280" y="155" text-anchor="start" fill="%23718096" font-size="12">45%</text><text x="150" y="290" text-anchor="middle" fill="%23718096" font-size="12">200%</text><text x="10" y="155" text-anchor="start" fill="%23718096" font-size="12">12%</text></svg>');
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    .chart-legend {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-top: 15px;
+    }
+
+    .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.85rem;
+        color: #718096;
+    }
+
+    .legend-color {
+        width: 12px;
+        height: 12px;
+        border-radius: 2px;
+    }
+
+    /* Achievements */
+    .achievements-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
+
+    .achievement-badge {
+        text-align: center;
+    }
+
+    .badge-icon {
+        width: 70px;
+        height: 70px;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 10px;
+        font-size: 2rem;
+        transition: all 0.3s;
+    }
+
+    .badge-icon:hover {
+        transform: scale(1.1);
+    }
+
+    .badge-icon.teal {
+        background: var(--teal);
+        color: white;
+    }
+
+    .badge-icon.gold {
+        background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+        color: white;
+    }
+
+    .badge-icon.gray {
+        background: #e5e7eb;
+        color: #9ca3af;
+    }
+
+    .badge-icon.locked {
+        background: #2d3748;
+        color: white;
+    }
+
+    .badge-label {
+        font-size: 0.85rem;
+        color: #718096;
+        font-weight: 500;
+    }
+
+    /* Mobile Styles */
+    .mobile-container {
+        padding: 20px;
+        padding-bottom: 80px;
+    }
+
+    .mobile-header {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .mobile-header h1 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #2d3748;
+    }
+
+    .mobile-interview-list {
+        margin-bottom: 25px;
+    }
+
+    .mobile-interview-item {
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .interview-info {
+        flex: 1;
+    }
+
+    .interview-info-date {
+        font-size: 0.85rem;
+        color: #9ca3af;
+        margin-bottom: 5px;
+    }
+
+    .mobile-interview-score {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #2d3748;
+    }
+
+    /* Responsive */
+    @media (max-width: 1200px) {
+        .dashboard-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .interviews-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .sidebar {
+            display: none;
+        }
+
+        .main-content {
+            margin-left: 0;
+            padding: 20px;
+            padding-bottom: 80px;
+        }
+
+        .mobile-bottom-nav {
+            display: block;
+        }
+
+        .dashboard-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .interviews-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .achievements-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .action-buttons {
+            flex-direction: column;
+        }
+
+        .action-buttons button {
+            width: 100%;
+        }
+    }
+</style>
+
+
+</head>
+<body>
+    <!-- Sidebar (Desktop) -->
+    <div class="sidebar">
+        <div class="logo-section">
+            <div class="logo-icon">
+                <i class="bi bi-lightning-charge"></i>
+            </div>
+            <div class="logo-text">God's Will</div>
+        </div>
+
+
+    <ul class="sidebar-menu">
+        <li>
+            <a href="#" class="active">
+                <i class="bi bi-house"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <li>
+            <a href="interview-roles.html">
+                <i class="bi bi-award"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="bi bi-camera-video"></i>
+                <span>Interviews</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="bi bi-trophy"></i>
+                <span>Badges</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="bi bi-person"></i>
+                <span>Profile</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="bi bi-gear"></i>
+                <span>Settings</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+    <!-- Dashboard Header -->
+    <div class="dashboard-header">
+        <h1>Dashboard</h1>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+        <h3>Quick Actions</h3>
+        <div class="action-buttons">
+            <button class="btn btn-new-interview" onclick="window.location.href='interview-roles.html'">
+                Start New Interview
+            </button>
+            <button class="btn btn-view-feedback" onclick="window.location.href='results.html'">
+                View Feedback
+            </button>
+        </div>
+    </div>
+
+    <!-- Dashboard Grid -->
+    <div class="dashboard-grid">
+        <!-- Recent Interviews -->
+        <div class="dashboard-card">
+            <h3 class="card-title">Recent Interviews</h3>
+            <div class="interviews-grid">
+                <div class="interview-card">
+                    <div class="interview-date">Joe · 20 23</div>
+                    <div class="interview-role">Frendent Developer</div>
+                    <div class="interview-score">85/100 <span class="fire-emoji">🔥</span></div>
+                    <button class="btn btn-view-details">View Details</button>
+                </div>
+
+                <div class="interview-card">
+                    <div class="interview-date">Jeb· 20 23</div>
+                    <div class="interview-role">Frendent Developer</div>
+                    <div class="interview-score">85/100 <span class="fire-emoji">🔥</span></div>
+                    <button class="btn btn-view-details">View Details</button>
+                </div>
+
+                <div class="interview-card">
+                    <div class="interview-date">Joe · 20 23</div>
+                    <div class="interview-role">Frendent Developer</div>
+                    <div class="interview-score">85/100 <span class="fire-emoji">🔥</span></div>
+                    <button class="btn btn-view-details">View Details</button>
+                </div>
+
+                <div class="interview-card">
+                    <div class="interview-date">Jeb· 20 23</div>
+                    <div class="interview-role">Frendent Developer</div>
+                    <div class="interview-score">85/100 <span class="fire-emoji">🔥</span></div>
+                    <button class="btn btn-view-details">View Details</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Graph -->
+        <div class="dashboard-card">
+            <h3 class="card-title">Performance Graph</h3>
+            <div class="performance-graph">
+                <div class="radar-chart"></div>
+                <div class="chart-legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #4dbbc4;"></div>
+                        <span>Confidence</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #6ed9e3;"></div>
+                        <span>Communication</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #93e6ec;"></div>
+                        <span>STAR Method</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Overview (Mobile) -->
+    <div class="dashboard-card d-md-none mb-4">
+        <h3 class="card-title">Progress Overview</h3>
+        <div class="progress-chart">
+            <div class="chart-placeholder"></div>
+            <div class="chart-label">Confidence Score: +10% this month</div>
+        </div>
+    </div>
+
+    <!-- Achievements -->
+    <div class="dashboard-card">
+        <h3 class="card-title">Achievements</h3>
+        <div class="achievements-grid">
+            <div class="achievement-badge">
+                <div class="badge-icon teal">
+                    <i class="bi bi-star-fill"></i>
+                </div>
+            </div>
+            <div class="achievement-badge">
+                <div class="badge-icon teal">
+                    <i class="bi bi-star-fill"></i>
+                </div>
+            </div>
+            <div class="achievement-badge">
+                <div class="badge-icon gold">
+                    <i class="bi bi-award-fill"></i>
+                </div>
+                <div class="badge-label">Top Performer</div>
+            </div>
+            <div class="achievement-badge">
+                <div class="badge-icon locked">
+                    <i class="bi bi-lock-fill"></i>
+                </div>
+            </div>
+            <div class="achievement-badge">
+                <div class="badge-icon gold">
+                    <i class="bi bi-trophy-fill"></i>
+                </div>
+                <div class="badge-label">Interview Ace</div>
+            </div>
+            <div class="achievement-badge">
+                <div class="badge-icon gray">
+                    <i class="bi bi-star"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Mobile Bottom Navigation -->
+<div class="mobile-bottom-nav">
+    <div class="bottom-nav-items">
+        <a href="#" class="bottom-nav-item active">
+            <i class="bi bi-house-fill"></i>
+            <span>Home</span>
+        </a>
+        <a href="#" class="bottom-nav-item">
+            <i class="bi bi-person"></i>
+            <span>Profile</span>
+        </a>
+        <a href="#" class="bottom-nav-item">
+            <i class="bi bi-gear"></i>
+            <span>Settings</span>
+        </a>
+        <a href="login.html" class="bottom-nav-item">
+            <i class="bi bi-box-arrow-right"></i>
+            <span>Logout</span>
+        </a>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+</html>
