@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>God's Will - Interview Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --teal: #4dbbc4;
+            --teal-dark: #3a9ba3;
+            --teal-light: #6ed9e3;
+            --dark-bg: #0f1e2e;
+            --blue-gradient: linear-gradient(135deg, #2c5aa0 0%, #4dbbc4 100%);
+        }
+
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        background: linear-gradient(135deg, #0a1520 0%, #1a3a4a 100%);
+        min-height: 100vh;
+        position: relative;
+        overflow-x: hidden;
+    }
+
+    /* Animated background particles */
+    .particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 0;
+    }
+
+    .particle {
+        position: absolute;
+        width: 3px;
+        height: 3px;
+        background: var(--teal);
+        border-radius: 50%;
+        opacity: 0.4;
+        animation: float 15s infinite;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0) translateX(0); }
+        50% { transform: translateY(-30px) translateX(15px); }
+    }
+
+    /* Container */
+    .results-container {
+        position: relative;
+        z-index: 1;
+        min-height: 100vh;
+        padding: 20px;
+    }
+
+    /* Desktop Header */
+    .desktop-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 40px;
+        margin-bottom: 30px;
+    }
+
+    .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .logo-icon {
+        width: 45px;
+        height: 45px;
+        background: var(--teal);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+    }
+
+    .logo-text {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: white;
+    }
+
+    .timer {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: white;
+        letter-spacing: 1px;
+    }
+
+    .btn-sign-out {
+        background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        color: white;
+        border: none;
+        border-radius: 25px;
+        padding: 12px 30px;
+        font-weight: 600;
+        transition: all 0.3s;
+    }
+
+    /* Results Card */
+    .results-card {
+        background: white;
+        border-radius: 30px;
+        padding: 50px 40px;
+        max-width: 900px;
+        margin: 0 auto;
+        box-shadow: 0 20px 60px rgba(77, 187, 196, 0.3);
+        animation: slideUp 0.6s ease-out;
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Mobile Header */
+    .mobile-header {
+        text-align: center;
+        margin-bottom: 30px;
+        padding: 20px;
+        background: var(--blue-gradient);
+        border-radius: 25px;
+    }
+
+    .mobile-header h1 {
+        color: white;
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    /* Success Message */
+    .success-message {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .success-message h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #2d3748;
+        margin-bottom: 15px;
+    }
+
+    .crown-emoji {
+        font-size: 2.5rem;
+        display: inline-block;
+        animation: bounce 1s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+    /* Score Display */
+    .score-display {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .score-number {
+        font-size: 6rem;
+        font-weight: 700;
+        color: var(--teal);
+        line-height: 1;
+        margin-bottom: 10px;
+    }
+
+    .score-total {
+        font-size: 2rem;
+        color: #718096;
+    }
+
+    /* Feedback Text */
+    .feedback-text {
+        background: #f7fafc;
+        border-left: 4px solid var(--teal);
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 40px;
+    }
+
+    .feedback-text p {
+        color: #4a5568;
+        line-height: 1.8;
+        margin: 0;
+    }
+
+    /* Skills Section */
+    .skills-section {
+        margin-bottom: 40px;
+    }
+
+    .skills-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
+
+    /* Progress Bars */
+    .progress-item {
+        margin-bottom: 25px;
+    }
+
+    .progress-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+    .progress-label {
+        font-weight: 600;
+        color: #2d3748;
+        font-size: 1.1rem;
+    }
+
+    .progress-value {
+        font-weight: 700;
+        color: var(--teal);
+        font-size: 1.1rem;
+    }
+
+    .progress-bar-custom {
+        height: 20px;
+        background: #e2e8f0;
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--teal) 0%, var(--teal-light) 100%);
+        border-radius: 10px;
+        transition: width 1s ease-out;
+        animation: fillProgress 1.5s ease-out;
+    }
+
+    @keyframes fillProgress {
+        from { width: 0; }
+    }
+
+    /* Bar Chart */
+    .bar-chart {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-around;
+        height: 200px;
+        gap: 20px;
+        padding: 20px 0;
+    }
+
+    .bar-item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .bar {
+        width: 100%;
+        background: linear-gradient(180deg, var(--teal) 0%, var(--teal-light) 100%);
+        border-radius: 8px 8px 0 0;
+        transition: height 1s ease-out;
+        animation: growBar 1.5s ease-out;
+    }
+
+    @keyframes growBar {
+        from { height: 0; }
+    }
+
+    .bar-label {
+        font-weight: 600;
+        color: #2d3748;
+        font-size: 0.9rem;
+    }
+
+    /* Radar Chart Placeholder */
+    .radar-chart {
+        width: 100%;
+        max-width: 400px;
+        aspect-ratio: 1;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><circle cx="200" cy="200" r="150" fill="none" stroke="%234dbbc4" stroke-width="2" opacity="0.2"/><circle cx="200" cy="200" r="100" fill="none" stroke="%234dbbc4" stroke-width="2" opacity="0.2"/><circle cx="200" cy="200" r="50" fill="none" stroke="%234dbbc4" stroke-width="2" opacity="0.2"/><path d="M 200 50 L 200 200 L 350 200 L 200 350 L 50 200 Z" fill="%234dbbc4" opacity="0.3" stroke="%234dbbc4" stroke-width="2"/></svg>');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        margin: 0 auto;
+    }
+
+    /* Action Buttons */
+    .action-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .btn-retry {
+        background: white;
+        color: var(--teal);
+        border: 3px solid var(--teal);
+        border-radius: 50px;
+        padding: 15px 40px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s;
+    }
+
+    .btn-retry:hover {
+        background: var(--teal);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .btn-feedback {
+        background: var(--teal);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 15px 40px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s;
+    }
+
+    .btn-feedback:hover {
+        background: var(--teal-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(77, 187, 196, 0.4);
+    }
+
+    .btn-dashboard {
+        background: #2d3748;
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 15px 40px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s;
+    }
+
+    .btn-dashboard:hover {
+        background: #1a202c;
+        transform: translateY(-2px);
+    }
+
+    /* Mobile Specific */
+    .mobile-results-card {
+        background: rgba(77, 187, 196, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 25px;
+        padding: 30px 20px;
+        margin-bottom: 20px;
+    }
+
+    .mobile-progress-item {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 15px;
+        margin-bottom: 15px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .desktop-header {
+            display: none;
+        }
+
+        .results-card {
+            padding: 30px 25px;
+            border-radius: 25px;
+        }
+
+        .success-message h1 {
+            font-size: 2rem;
+        }
+
+        .score-number {
+            font-size: 4rem;
+        }
+
+        .score-total {
+            font-size: 1.5rem;
+        }
+
+        .skills-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .action-buttons {
+            flex-direction: column;
+        }
+
+        .action-buttons button {
+            width: 100%;
+        }
+    }
+
+    @media (min-width: 769px) {
+        .mobile-header {
+            display: none;
+        }
+    }
+</style>
+
+
+</head>
+<body>
+    <!-- Animated particles background -->
+    <div class="particles" id="particles"></div>
+
+
+<div class="results-container">
+    <!-- Desktop Header -->
+    <div class="desktop-header">
+        <div class="logo-section">
+            <div class="logo-icon">
+                <i class="bi bi-lightning-charge"></i>
+            </div>
+            <div class="logo-text">God's Will</div>
+        </div>
+        <div class="timer">08:82</div>
+        <button class="btn btn-sign-out" onclick="signOut()">
+            Sign Sin
+        </button>
+    </div>
+
+    <!-- Results Card -->
+    <div class="results-card">
+        <!-- Success Message -->
+        <div class="success-message">
+            <h1>You got the job! <span class="crown-emoji">👑</span></h1>
+        </div>
+
+        <!-- Score Display -->
+        <div class="score-display">
+            <div class="score-number">85</div>
+            <div class="score-total">/100</div>
+        </div>
+
+        <!-- Feedback Text -->
+        <div class="feedback-text">
+            <p>
+                Excellent work! Your responses were clear cleandidento! Confident. Focus an tailoring the specific role specific role requirements for even higher score.
+            </p>
+        </div>
+
+        <!-- Skills Section -->
+        <div class="skills-section">
+            <div class="skills-grid">
+                <!-- Left Column: Progress Bars or Bar Chart -->
+                <div>
+                    <div class="bar-chart">
+                        <div class="bar-item">
+                            <div class="bar" style="height: 50%;" data-height="50"></div>
+                            <div class="bar-label">50%</div>
+                        </div>
+                        <div class="bar-item">
+                            <div class="bar" style="height: 80%;" data-height="80"></div>
+                            <div class="bar-label">80%</div>
+                        </div>
+                        <div class="bar-item">
+                            <div class="bar" style="height: 60%;" data-height="60"></div>
+                            <div class="bar-label">60%</div>
+                        </div>
+                        <div class="bar-item">
+                            <div class="bar" style="height: 80%;" data-height="80"></div>
+                            <div class="bar-label">80%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Radar Chart -->
+                <div>
+                    <div class="radar-chart"></div>
+                    <div class="text-center mt-3">
+                        <small class="text-muted">Confidence • STAR Method • Problem-Solving</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons mt-5">
+            <button class="btn btn-retry" onclick="retryInterview()">
+                Retry Interview
+            </button>
+            <button class="btn btn-feedback" onclick="viewFeedback()">
+                View Detailed Feedback
+            </button>
+            <button class="btn btn-dashboard" onclick="goToDashboard()">
+                Go to Dashboard
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Alternative Layout (if needed) -->
+    <div class="d-none">
+        <div class="mobile-results-card">
+            <div class="mobile-progress-item">
+                <div class="progress-item">
+                    <div class="progress-header">
+                        <span class="progress-label">Confidence</span>
+                        <span class="progress-value">90%</span>
+                    </div>
+                    <div class="progress-bar-custom">
+                        <div class="progress-fill" style="width: 90%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mobile-progress-item">
+                <div class="progress-item">
+                    <div class="progress-header">
+                        <span class="progress-label">Confidence</span>
+                        <span class="progress-value">80%</span>
+                    </div>
+                    <div class="progress-bar-custom">
+                        <div class="progress-fill" style="width: 80%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mobile-progress-item">
+                <div class="progress-item">
+                    <div class="progress-header">
+                        <span class="progress-label">Communication</span>
+                        <span class="progress-value">75%</span>
+                    </div>
+                    <div class="progress-bar-custom">
+                        <div class="progress-fill" style="width: 75%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Create floating particles
+    function createParticles() {
+        const container = document.getElementById('particles');
+        for (let i = 0; i < 40; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            container.appendChild(particle);
+        }
+    }
+
+    // Animate progress bars on load
+    window.addEventListener('load', function() {
+        const bars = document.querySelectorAll('.bar');
+        bars.forEach((bar, index) => {
+            const height = bar.getAttribute('data-height');
+            setTimeout(() => {
+                bar.style.height = height + '%';
+            }, index * 200);
+        });
+    });
+
+    // Action button handlers
+    function retryInterview() {
+        if (confirm('Start a new interview?')) {
+            window.location.href = 'interview-roles.html';
+        }
+    }
+
+    function viewFeedback() {
+        alert('Opening detailed feedback...');
+        // window.location.href = 'feedback-detailed.html';
+    }
+
+    function goToDashboard() {
+        window.location.href = 'dashboard.html';
+    }
+
+    function signOut() {
+        if (confirm('Are you sure you want to sign out?')) {
+            window.location.href = 'login.html';
+        }
+    }
+
+    // Initialize
+    createParticles();
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>God's Will - Interview in Progress</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --teal: #4dbbc4;
+            --teal-light: #6ed9e3;
+            --dark-bg: #0f1e2e;
+            --darker-bg: #0a1520;
+        }
+
+```
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        background: linear-gradient(135deg, #0a1520 0%, #1a3a4a 100%);
+        overflow: hidden;
+    }
+
+    /* Animated background particles */
+    .particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 1;
+    }
+
+    .particle {
+        position: absolute;
+        width: 3px;
+        height: 3px;
+        background: var(--teal);
+        border-radius: 50%;
+        opacity: 0.6;
+        animation: float 20s infinite;
+    }
+
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0) translateX(0);
+        }
+        25% {
+            transform: translateY(-20px) translateX(10px);
+        }
+        50% {
+            transform: translateY(-40px) translateX(-10px);
+        }
+        75% {
+            transform: translateY(-20px) translateX(10px);
+        }
+    }
+
+    /* Container */
+    .interview-container {
+        position: relative;
+        z-index: 2;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Header */
+    .interview-header {
+        padding: 20px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(15, 30, 46, 0.8);
+        backdrop-filter: blur(10px);
+    }
+
+    .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .logo-icon {
+        width: 45px;
+        height: 45px;
+        background: var(--teal);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+    }
+
+    .logo-text {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: white;
+    }
+
+    .timer {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: white;
+        letter-spacing: 1px;
+    }
+
+    .btn-end {
+        background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        color: white;
+        border: none;
+        border-radius: 25px;
+        padding: 12px 30px;
+        font-weight: 600;
+        transition: all 0.3s;
+    }
+
+    .btn-end:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+    }
+
+    /* Main Content */
+    .interview-main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 20px;
+    }
+
+    /* AI Avatar */
+    .ai-avatar-container {
+        position: relative;
+        margin-bottom: 40px;
+    }
+
+    .sound-waves {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 300px;
+        height: 300px;
+    }
+
+    .wave {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 2px solid var(--teal);
+        border-radius: 50%;
+        opacity: 0;
+    }
+
+    .wave-1 {
+        width: 150px;
+        height: 150px;
+        animation: wave-pulse 2s ease-out infinite;
+    }
+
+    .wave-2 {
+        width: 200px;
+        height: 200px;
+        animation: wave-pulse 2s ease-out 0.3s infinite;
+    }
+
+    .wave-3 {
+        width: 250px;
+        height: 250px;
+        animation: wave-pulse 2s ease-out 0.6s infinite;
+    }
+
+    @keyframes wave-pulse {
+        0% {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.5);
+        }
+        50% {
+            opacity: 0.5;
+        }
+        100% {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+    }
+
+    .ai-avatar {
+        width: 180px;
+        height: 180px;
+        background: linear-gradient(135deg, #4dbbc4 0%, #6ed9e3 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 2;
+        box-shadow: 0 0 40px rgba(77, 187, 196, 0.6);
+        animation: glow 2s ease-in-out infinite;
+    }
+
+    @keyframes glow {
+        0%, 100% {
+            box-shadow: 0 0 40px rgba(77, 187, 196, 0.6);
+        }
+        50% {
+            box-shadow: 0 0 60px rgba(77, 187, 196, 0.9);
+        }
+    }
+
+    .ai-avatar i {
+        font-size: 5rem;
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    /* Desktop AI Head */
+    .ai-head {
+        width: 300px;
+        height: 300px;
+        position: relative;
+        margin-bottom: 40px;
+    }
+
+    .ai-head-wireframe {
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle, rgba(77, 187, 196, 0.2) 0%, transparent 70%);
+        border-radius: 50%;
+        position: relative;
+        animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    .head-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 8rem;
+        color: var(--teal);
+        opacity: 0.8;
+    }
+
+    /* Status Text */
+    .status-container {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .status-main {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 15px;
+        animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.7;
+        }
+    }
+
+    .status-sub {
+        font-size: 1.3rem;
+        color: var(--teal-light);
+        font-weight: 500;
+    }
+
+    /* Waveform */
+    .waveform-container {
+        width: 100%;
+        max-width: 900px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-bottom: 30px;
+    }
+
+    .waveform-bar {
+        width: 6px;
+        background: var(--teal);
+        border-radius: 3px;
+        animation: waveform 1.2s ease-in-out infinite;
+    }
+
+    .waveform-bar:nth-child(1) { height: 20px; animation-delay: 0s; }
+    .waveform-bar:nth-child(2) { height: 40px; animation-delay: 0.1s; }
+    .waveform-bar:nth-child(3) { height: 60px; animation-delay: 0.2s; }
+    .waveform-bar:nth-child(4) { height: 80px; animation-delay: 0.3s; }
+    .waveform-bar:nth-child(5) { height: 60px; animation-delay: 0.4s; }
+    .waveform-bar:nth-child(6) { height: 40px; animation-delay: 0.5s; }
+    .waveform-bar:nth-child(7) { height: 60px; animation-delay: 0.6s; }
+    .waveform-bar:nth-child(8) { height: 80px; animation-delay: 0.7s; }
+    .waveform-bar:nth-child(9) { height: 60px; animation-delay: 0.8s; }
+    .waveform-bar:nth-child(10) { height: 40px; animation-delay: 0.9s; }
+    .waveform-bar:nth-child(11) { height: 20px; animation-delay: 1s; }
+
+    @keyframes waveform {
+        0%, 100% {
+            transform: scaleY(1);
+            opacity: 0.6;
+        }
+        50% {
+            transform: scaleY(1.5);
+            opacity: 1;
+        }
+    }
+
+    .ai-status {
+        text-align: center;
+        color: rgba(110, 217, 227, 0.8);
+        font-size: 1rem;
+        margin-bottom: 20px;
+    }
+
+    /* Microphone Button */
+    .mic-container {
+        position: relative;
+    }
+
+    .mic-button {
+        width: 100px;
+        height: 100px;
+        background: linear-gradient(135deg, #4dbbc4 0%, #3a9ba3 100%);
+        border: none;
+        border-radius: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 10px 30px rgba(77, 187, 196, 0.4);
+        position: relative;
+        z-index: 2;
+    }
+
+    .mic-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 15px 40px rgba(77, 187, 196, 0.6);
+    }
+
+    .mic-button.active {
+        animation: mic-pulse 1s ease-in-out infinite;
+    }
+
+    @keyframes mic-pulse {
+        0%, 100% {
+            transform: scale(1);
+            box-shadow: 0 10px 30px rgba(77, 187, 196, 0.4);
+        }
+        50% {
+            transform: scale(1.1);
+            box-shadow: 0 20px 50px rgba(77, 187, 196, 0.8);
+        }
+    }
+
+    .mic-button i {
+        font-size: 2.5rem;
+        color: rgba(10, 21, 32, 0.8);
+    }
+
+    .mic-waves {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 150px;
+        height: 150px;
+    }
+
+    .mic-wave {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 2px solid var(--teal);
+        border-radius: 20px;
+        opacity: 0;
+    }
+
+    .mic-wave-1 {
+        width: 110px;
+        height: 110px;
+        animation: mic-wave-pulse 1.5s ease-out infinite;
+    }
+
+    .mic-wave-2 {
+        width: 130px;
+        height: 130px;
+        animation: mic-wave-pulse 1.5s ease-out 0.3s infinite;
+    }
+
+    .mic-wave-3 {
+        width: 150px;
+        height: 150px;
+        animation: mic-wave-pulse 1.5s ease-out 0.6s infinite;
+    }
+
+    @keyframes mic-wave-pulse {
+        0% {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.8);
+        }
+        50% {
+            opacity: 0.4;
+        }
+        100% {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .interview-header {
+            padding: 15px 20px;
+        }
+
+        .logo-text {
+            font-size: 1.2rem;
+        }
+
+        .timer {
+            font-size: 1.2rem;
+        }
+
+        .btn-end {
+            padding: 10px 20px;
+            font-size: 0.9rem;
+        }
+
+        .ai-avatar {
+            width: 140px;
+            height: 140px;
+        }
+
+        .ai-avatar i {
+            font-size: 4rem;
+        }
+
+        .status-main {
+            font-size: 2rem;
+        }
+
+        .status-sub {
+            font-size: 1.1rem;
+        }
+
+        .mic-button {
+            width: 80px;
+            height: 80px;
+        }
+
+        .mic-button i {
+            font-size: 2rem;
+        }
+
+        .waveform-container {
+            max-width: 300px;
+            height: 60px;
+        }
+
+        .waveform-bar {
+            width: 4px;
+        }
+
+        .ai-head {
+            width: 200px;
+            height: 200px;
+        }
+
+        .head-icon {
+            font-size: 5rem;
+        }
+    }
+
+    /* Desktop specific styles */
+    @media (min-width: 769px) {
+        .mobile-only {
+            display: none;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .desktop-only {
+            display: none;
+        }
+    }
+</style>
+```
+
+</head>
+<body>
+    <!-- Animated particles background -->
+    <div class="particles" id="particles"></div>
+
+```
+<div class="interview-container">
+    <!-- Header -->
+    <div class="interview-header">
+        <div class="logo-section">
+            <div class="logo-icon">
+                <i class="bi bi-lightning-charge"></i>
+            </div>
+            <div class="logo-text desktop-only">God's Will</div>
+        </div>
+        <div class="timer" id="timer">03:15</div>
+        <button class="btn btn-end" onclick="endInterview()">
+            End Interview
+        </button>
+    </div>
+
+    <!-- Main Interview Area -->
+    <div class="interview-main">
+        <!-- Desktop: AI Head Wireframe -->
+        <div class="desktop-only">
+            <div class="ai-head">
+                <div class="sound-waves">
+                    <div class="wave wave-1"></div>
+                    <div class="wave wave-2"></div>
+                    <div class="wave wave-3"></div>
+                </div>
+                <i class="bi bi-person-circle head-icon"></i>
+            </div>
+        </div>
+
+        <!-- Mobile: AI Avatar with Waves -->
+        <div class="mobile-only">
+            <div class="ai-avatar-container">
+                <div class="sound-waves">
+                    <div class="wave wave-1"></div>
+                    <div class="wave wave-2"></div>
+                    <div class="wave wave-3"></div>
+                </div>
+                <div class="ai-avatar">
+                    <i class="bi bi-emoji-smile"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status Text -->
+        <div class="status-container">
+            <div class="status-main" id="statusMain">Speaking...</div>
+            <div class="status-sub" id="statusSub">Listening...</div>
+        </div>
+
+        <!-- Waveform Visualization (Desktop) -->
+        <div class="waveform-container desktop-only">
+            <div class="waveform-bar"></div>
+            <div class="waveform-bar"></div>
+            <div class="waveform-bar"></div>
+            <div class="waveform-bar"></div>
+            <div class="waveform-bar"></div>
+            <div class="waveform-bar"></div>
+            <div class="waveform-bar"></div>
+            <div class="waveform-bar"></div>
+            <div class="waveform-bar"></div>
+            <div class="waveform-bar"></div>
+            <div class="waveform-bar"></div>
+        </div>
+
+        <!-- AI Status (Desktop) -->
+        <div class="ai-status desktop-only" id="aiStatus">AI Thinking...</div>
+
+        <!-- Microphone Button -->
+        <div class="mic-container">
+            <div class="mic-waves">
+                <div class="mic-wave mic-wave-1"></div>
+                <div class="mic-wave mic-wave-2"></div>
+                <div class="mic-wave mic-wave-3"></div>
+            </div>
+            <button class="mic-button active" id="micButton" onclick="toggleMic()">
+                <i class="bi bi-mic-fill" id="micIcon"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Create floating particles
+    function createParticles() {
+        const container = document.getElementById('particles');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+            container.appendChild(particle);
+        }
+    }
+
+    // Timer functionality
+    let seconds = 195; // 3:15
+    function updateTimer() {
+        const minutes = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        document.getElementById('timer').textContent = 
+            `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        seconds++;
+    }
+
+    // Toggle microphone
+    let isMicActive = true;
+    function toggleMic() {
+        isMicActive = !isMicActive;
+        const micButton = document.getElementById('micButton');
+        const micIcon = document.getElementById('micIcon');
+        
+        if (isMicActive) {
+            micButton.classList.add('active');
+            micIcon.className = 'bi bi-mic-fill';
+        } else {
+            micButton.classList.remove('active');
+            micIcon.className = 'bi bi-mic-mute-fill';
+        }
+    }
+
+    // Simulate AI responses
+    let statusIndex = 0;
+    const statuses = [
+        { main: 'Speaking...', sub: 'Listening...' },
+        { main: 'Listening...', sub: 'Processing your answer...' },
+        { main: 'Thinking...', sub: 'Analyzing response...' },
+        { main: 'Speaking...', sub: 'Asking next question...' }
+    ];
+
+    function updateStatus() {
+        const status = statuses[statusIndex];
+        document.getElementById('statusMain').textContent = status.main;
+        document.getElementById('statusSub').textContent = status.sub;
+        
+        const aiStatus = document.getElementById('aiStatus');
+        if (aiStatus) {
+            aiStatus.textContent = status.main === 'Speaking...' ? 'AI Speaking...' : 'AI Thinking...';
+        }
+        
+        statusIndex = (statusIndex + 1) % statuses.length;
+    }
+
+    // End interview
+    function endInterview() {
+        if (confirm('Are you sure you want to end this interview?')) {
+            alert('Interview ended! Generating your feedback report...');
+            // window.location.href = 'feedback.html';
+        }
+    }
+
+    // Initialize
+    createParticles();
+    setInterval(updateTimer, 1000);
+    setInterval(updateStatus, 4000);
+</script>
+```
+
+</body>
+</html>
