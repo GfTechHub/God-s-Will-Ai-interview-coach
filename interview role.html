@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>God's Will - Choose Your Interview Role</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --teal: #4dbbc4;
+            --teal-dark: #3a9ba3;
+            --teal-light: #e0f5f7;
+            --primary-blue: #2c5aa0;
+            --dark-blue: #1e3a5f;
+        }
+
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        background-color: #f5f5f5;
+    }
+
+    /* Desktop View */
+    .desktop-container {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        padding: 40px 20px;
+    }
+
+    .desktop-header {
+        background: linear-gradient(135deg, #2c5aa0 0%, #4dbbc4 100%);
+        padding: 60px 0;
+        text-align: center;
+        margin-bottom: 40px;
+        border-radius: 15px;
+    }
+
+    .desktop-header h1 {
+        color: white;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .roles-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .role-card {
+        background: white;
+        border-radius: 20px;
+        padding: 35px 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s;
+        cursor: pointer;
+        border: 3px solid transparent;
+        position: relative;
+    }
+
+    .role-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(77, 187, 196, 0.3);
+        border-color: var(--teal);
+    }
+
+    .role-card.selected {
+        border-color: var(--teal);
+        background: var(--teal-light);
+    }
+
+    .role-card.ai-powered {
+        background: linear-gradient(135deg, #4dbbc4 0%, #3a9ba3 100%);
+        color: white;
+    }
+
+    .role-card.ai-powered .role-description {
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    .role-icon {
+        width: 70px;
+        height: 70px;
+        background: var(--teal-light);
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .role-card.ai-powered .role-icon {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .role-icon i {
+        font-size: 2rem;
+        color: var(--teal);
+    }
+
+    .role-card.ai-powered .role-icon i {
+        color: white;
+    }
+
+    .role-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 12px;
+        color: #2d3748;
+    }
+
+    .role-card.ai-powered .role-title {
+        color: white;
+    }
+
+    .role-description {
+        font-size: 0.95rem;
+        color: #718096;
+        line-height: 1.5;
+        margin-bottom: 20px;
+    }
+
+    .btn-start {
+        background-color: var(--teal);
+        color: white;
+        border: none;
+        border-radius: 25px;
+        padding: 10px 30px;
+        font-weight: 600;
+        transition: all 0.3s;
+        float: right;
+    }
+
+    .btn-start:hover {
+        background-color: var(--teal-dark);
+        transform: translateX(5px);
+    }
+
+    .role-card.ai-powered .btn-start {
+        background-color: white;
+        color: var(--teal);
+    }
+
+    .role-card.ai-powered .btn-start:hover {
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+
+    .start-interview-section {
+        text-align: center;
+        margin-top: 50px;
+        padding-bottom: 40px;
+    }
+
+    .btn-start-interview {
+        background-color: var(--teal);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 18px 60px;
+        font-weight: 600;
+        font-size: 1.2rem;
+        transition: all 0.3s;
+    }
+
+    .btn-start-interview:hover {
+        background-color: var(--teal-dark);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(77, 187, 196, 0.4);
+    }
+
+    /* Mobile View */
+    .mobile-container {
+        min-height: 100vh;
+        background-color: #f5f5f5;
+        padding: 30px 20px;
+    }
+
+    .mobile-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .mobile-header h1 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #2d3748;
+        margin: 0;
+    }
+
+    .mobile-role-card {
+        background: white;
+        border-radius: 20px;
+        padding: 25px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        transition: all 0.3s;
+    }
+
+    .mobile-role-card:hover {
+        transform: translateX(5px);
+        box-shadow: 0 6px 15px rgba(77, 187, 196, 0.2);
+    }
+
+    .mobile-role-card.ai-powered {
+        background: linear-gradient(135deg, #4dbbc4 0%, #3a9ba3 100%);
+        color: white;
+    }
+
+    .mobile-role-icon {
+        width: 60px;
+        height: 60px;
+        background: var(--teal-light);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .mobile-role-card.ai-powered .mobile-role-icon {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .mobile-role-icon i {
+        font-size: 1.8rem;
+        color: var(--teal);
+    }
+
+    .mobile-role-card.ai-powered .mobile-role-icon i {
+        color: white;
+    }
+
+    .mobile-role-content {
+        flex: 1;
+    }
+
+    .mobile-role-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 5px;
+        color: #2d3748;
+    }
+
+    .mobile-role-card.ai-powered .mobile-role-title {
+        color: white;
+    }
+
+    .mobile-role-description {
+        font-size: 0.85rem;
+        color: #718096;
+        margin: 0;
+    }
+
+    .mobile-role-card.ai-powered .mobile-role-description {
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    .mobile-btn-start {
+        background-color: var(--teal);
+        color: white;
+        border: none;
+        border-radius: 20px;
+        padding: 8px 20px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+    }
+
+    .mobile-role-card.ai-powered .mobile-btn-start {
+        background-color: white;
+        color: var(--teal);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .desktop-container {
+            display: none;
+        }
+    }
+
+    @media (min-width: 769px) {
+        .mobile-container {
+            display: none;
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .roles-grid {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+    }
+</style>
+
+
+</head>
+<body>
+    <!-- Desktop View -->
+    <div class="desktop-container">
+        <div class="container">
+            <div class="desktop-header">
+                <h1>Select Your Interview Type</h1>
+            </div>
+
+
+        <div class="roles-grid">
+            <!-- Frontend Developer -->
+            <div class="role-card" data-role="frontend">
+                <div class="role-icon">
+                    <i class="bi bi-code-slash"></i>
+                </div>
+                <h3 class="role-title">Frontend Developer</h3>
+                <p class="role-description">Practice coding challenges & technical questions.</p>
+                <button class="btn btn-start">Start</button>
+            </div>
+
+            <!-- Customer Support -->
+            <div class="role-card" data-role="support">
+                <div class="role-icon">
+                    <i class="bi bi-headset"></i>
+                </div>
+                <h3 class="role-title">Customer Support</h3>
+                <p class="role-description">Handle difficult customers & scenarios</p>
+                <button class="btn btn-start">Start</button>
+            </div>
+
+            <!-- Virtual Assistant -->
+            <div class="role-card" data-role="assistant">
+                <div class="role-icon">
+                    <i class="bi bi-calendar-check"></i>
+                </div>
+                <h3 class="role-title">Virtual Assistant</h3>
+                <p class="role-description">Master scheduling & communication</p>
+                <button class="btn btn-start">Start</button>
+            </div>
+
+            <!-- Graphic Designer -->
+            <div class="role-card" data-role="designer">
+                <div class="role-icon">
+                    <i class="bi bi-brush"></i>
+                </div>
+                <h3 class="role-title">Graphic Designer</h3>
+                <p class="role-description">Discuss portfolio & design process</p>
+                <button class="btn btn-start">Start</button>
+            </div>
+
+            <!-- AI Powered - Multipurpose -->
+            <div class="role-card ai-powered" data-role="multipurpose">
+                <div class="role-icon">
+                    <i class="bi bi-lightbulb"></i>
+                </div>
+                <h3 class="role-title">Multipurpose Interview</h3>
+                <p class="role-description">Let AI ask what job job you came for</p>
+                <button class="btn btn-start">Start</button>
+            </div>
+        </div>
+
+        <div class="start-interview-section">
+            <button class="btn btn-start-interview" onclick="startInterview()">
+                Start Interview
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Mobile View -->
+<div class="mobile-container">
+    <div class="mobile-header">
+        <h1>Choose Your Interview Role</h1>
+    </div>
+
+    <!-- Frontend Developer -->
+    <div class="mobile-role-card" onclick="selectMobileRole(this, 'frontend')">
+        <div class="mobile-role-icon">
+            <i class="bi bi-code-slash"></i>
+        </div>
+        <div class="mobile-role-content">
+            <h3 class="mobile-role-title">Frendent Developer</h3>
+            <p class="mobile-role-description">Practice coding challsanges & technical questions.</p>
+        </div>
+        <button class="mobile-btn-start">Start</button>
+    </div>
+
+    <!-- Customer Support -->
+    <div class="mobile-role-card" onclick="selectMobileRole(this, 'support')">
+        <div class="mobile-role-icon">
+            <i class="bi bi-headset"></i>
+        </div>
+        <div class="mobile-role-content">
+            <h3 class="mobile-role-title">Customer Support</h3>
+            <p class="mobile-role-description">Handle difficult customers & scenarios</p>
+        </div>
+        <button class="mobile-btn-start">Start</button>
+    </div>
+
+    <!-- Virtual Assistant -->
+    <div class="mobile-role-card" onclick="selectMobileRole(this, 'assistant')">
+        <div class="mobile-role-icon">
+            <i class="bi bi-calendar-check"></i>
+        </div>
+        <div class="mobile-role-content">
+            <h3 class="mobile-role-title">Virtual Assistant</h3>
+            <p class="mobile-role-description">Master scheduling & & communication</p>
+        </div>
+        <button class="mobile-btn-start">Start</button>
+    </div>
+
+    <!-- Graphic Designer -->
+    <div class="mobile-role-card" onclick="selectMobileRole(this, 'designer')">
+        <div class="mobile-role-icon">
+            <i class="bi bi-brush"></i>
+        </div>
+        <div class="mobile-role-content">
+            <h3 class="mobile-role-title">Graphic Designer</h3>
+            <p class="mobile-role-description">Discuss portfolio & design process</p>
+        </div>
+        <button class="mobile-btn-start">Start</button>
+    </div>
+
+    <!-- AI Powered - Multipurpose -->
+    <div class="mobile-role-card ai-powered" onclick="selectMobileRole(this, 'multipurpose')">
+        <div class="mobile-role-icon">
+            <i class="bi bi-lightbulb"></i>
+        </div>
+        <div class="mobile-role-content">
+            <h3 class="mobile-role-title">Let AI ask what job job you came for</h3>
+        </div>
+        <button class="mobile-btn-start">Start</button>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    let selectedRole = null;
+
+    // Desktop role selection
+    document.querySelectorAll('.desktop-container .role-card').forEach(card => {
+        card.addEventListener('click', function(e) {
+            // Don't trigger if clicking the start button directly
+            if (e.target.classList.contains('btn-start')) {
+                const role = this.getAttribute('data-role');
+                startInterviewWithRole(role);
+                return;
+            }
+
+            // Remove selected class from all cards
+            document.querySelectorAll('.desktop-container .role-card').forEach(c => {
+                c.classList.remove('selected');
+            });
+
+            // Add selected class to clicked card
+            this.classList.add('selected');
+            selectedRole = this.getAttribute('data-role');
+        });
+    });
+
+    // Mobile role selection
+    function selectMobileRole(element, role) {
+        startInterviewWithRole(role);
+    }
+
+    // Start interview with selected role
+    function startInterview() {
+        if (selectedRole) {
+            startInterviewWithRole(selectedRole);
+        } else {
+            alert('Please select an interview role first!');
+        }
+    }
+
+    function startInterviewWithRole(role) {
+        console.log('Starting interview for role:', role);
+        alert(`Starting ${role} interview! This would navigate to the interview page.`);
+        // In production, navigate to the interview page
+        // window.location.href = `interview.html?role=${role}`;
+    }
+</script>
+
+
+</body>
+</html>

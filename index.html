@@ -138,12 +138,15 @@
         font-weight: 600;
         border: none;
         transition: all 0.3s;
+        text-decoration: none;
+        display: inline-block;
     }
 
     .btn-primary-custom:hover {
         background-color: #234785;
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(44, 90, 160, 0.4);
+        color: white;
     }
 
     .btn-outline-custom {
@@ -154,11 +157,14 @@
         font-weight: 600;
         border: 2px solid white;
         transition: all 0.3s;
+        text-decoration: none;
+        display: inline-block;
     }
 
     .btn-outline-custom:hover {
         background-color: rgba(255,255,255,0.9);
         transform: translateY(-2px);
+        color: var(--primary-blue);
     }
 
     /* How It Works Section */
@@ -303,6 +309,35 @@
         box-shadow: 0 6px 20px rgba(44, 90, 160, 0.4);
     }
 
+    /* Navbar buttons */
+    .nav-btn {
+        padding: 8px 25px;
+        border-radius: 25px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s;
+    }
+
+    .btn-outline-primary {
+        border: 2px solid var(--primary-blue);
+        color: var(--primary-blue);
+    }
+
+    .btn-outline-primary:hover {
+        background-color: var(--primary-blue);
+        color: white;
+    }
+
+    .btn-primary {
+        background-color: var(--primary-blue);
+        color: white;
+        border: none;
+    }
+
+    .btn-primary:hover {
+        background-color: #234785;
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
         .hero-section h1 {
@@ -327,13 +362,13 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light sticky-top">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="#">
-                <span class="logo-icon"><href="assets/logo.jpg"></span>
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <span class="logo-icon">😊</span>
                 God's Will
             </a>
             <div class="ms-auto">
-                <button class="btn btn-outline-primary me-2">Sign In</button>
-                <button class="btn btn-primary">Sign up</button>
+                <a href="login.html" class="btn btn-outline-primary nav-btn me-2">Sign In</a>
+                <a href="signup.html" class="btn btn-primary nav-btn">Sign Up</a>
             </div>
         </div>
     </nav>
@@ -351,8 +386,8 @@
                         Get the Job.
                     </h1>
                     <div class="d-flex gap-3 flex-wrap">
-                        <button class="btn btn-primary-custom">Start Practice</button>
-                        <button class="btn btn-outline-custom">Sign In</button>
+                        <a href="signup.html" class="btn-primary-custom">Start Practice</a>
+                        <a href="login.html" class="btn-outline-custom">Sign In</a>
                     </div>
                 </div>
             </div>
