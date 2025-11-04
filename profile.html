@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>God's Will - Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --teal: #4dbbc4;
+            --teal-dark: #3a9ba3;
+            --dark-blue: #2c3e50;
+            --darker-blue: #1e2d3d;
+        }
+
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        background: #f5f7fa;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        width: 280px;
+        height: 100vh;
+        background: linear-gradient(180deg, #2c3e50 0%, #1e3a4a 100%);
+        position: fixed;
+        left: 0;
+        top: 0;
+        padding: 30px 0;
+        z-index: 1000;
+    }
+
+    .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 0 30px;
+        margin-bottom: 40px;
+    }
+
+    .logo-icon {
+        width: 50px;
+        height: 50px;
+        background: var(--teal);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+    }
+
+    .logo-text {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: white;
+    }
+
+    .sidebar-menu {
+        list-style: none;
+    }
+
+    .sidebar-menu li {
+        margin-bottom: 5px;
+    }
+
+    .sidebar-menu a {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 15px 30px;
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1.1rem;
+        transition: all 0.3s;
+    }
+
+    .sidebar-menu a:hover {
+        color: white;
+        background: rgba(77, 187, 196, 0.1);
+    }
+
+    .sidebar-menu a.active {
+        color: white;
+        background: var(--teal);
+    }
+
+    .sidebar-menu a i {
+        font-size: 1.3rem;
+    }
+
+    /* Main Content */
+    .main-content {
+        margin-left: 280px;
+        padding: 40px;
+        min-height: 100vh;
+    }
+
+    /* Mobile Container */
+    .mobile-container {
+        padding: 20px;
+        padding-bottom: 80px;
+        background: white;
+        min-height: 100vh;
+    }
+
+    /* Profile Header */
+    .profile-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .profile-avatar-container {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 20px;
+    }
+
+    .profile-avatar {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+        color: #6366f1;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .edit-avatar-btn {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        background: var(--teal);
+        border: 3px solid white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .edit-avatar-btn:hover {
+        background: var(--teal-dark);
+        transform: scale(1.1);
+    }
+
+    .profile-name {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #2d3748;
+        margin-bottom: 5px;
+    }
+
+    .profile-subtitle {
+        color: #9ca3af;
+        font-size: 1rem;
+    }
+
+    /* Tab Navigation */
+    .tab-navigation {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+    }
+
+    .tab-btn {
+        background: white;
+        border: 2px solid #e5e7eb;
+        border-radius: 25px;
+        padding: 12px 30px;
+        font-weight: 600;
+        color: #6b7280;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .tab-btn:hover {
+        border-color: var(--teal);
+        color: var(--teal);
+    }
+
+    .tab-btn.active {
+        background: var(--teal);
+        border-color: var(--teal);
+        color: white;
+    }
+
+    /* Form Fields */
+    .form-section {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-label {
+        font-weight: 700;
+        color: #2d3748;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .form-value {
+        color: #9ca3af;
+        padding: 15px;
+        background: #f9fafb;
+        border-radius: 10px;
+    }
+
+    .form-control-custom {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid #e5e7eb;
+        border-radius: 10px;
+        font-size: 1rem;
+        transition: all 0.3s;
+    }
+
+    .form-control-custom:focus {
+        outline: none;
+        border-color: var(--teal);
+    }
+
+    /* Desktop Layout */
+    .desktop-profile-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+
+    .profile-card {
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+
+    .card-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #2d3748;
+    }
+
+    .btn-sign-out {
+        color: #6b7280;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 600;
+        transition: color 0.3s;
+    }
+
+    .btn-sign-out:hover {
+        color: #ef4444;
+    }
+
+    /* Profile Details Card */
+    .detail-field {
+        margin-bottom: 20px;
+    }
+
+    .detail-label {
+        font-size: 0.85rem;
+        color: #9ca3af;
+        margin-bottom: 8px;
+    }
+
+    .detail-value {
+        padding: 12px;
+        background: #f9fafb;
+        border-radius: 8px;
+        color: #4b5563;
+    }
+
+    .toggle-switch {
+        float: right;
+    }
+
+    /* Badges Grid */
+    .badges-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .badge-item {
+        text-align: center;
+        padding: 20px;
+        border-radius: 15px;
+        background: #f9fafb;
+        transition: all 0.3s;
+    }
+
+    .badge-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .badge-icon-large {
+        width: 60px;
+        height: 60px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 10px;
+        font-size: 2rem;
+    }
+
+    .badge-icon-large.star {
+        background: var(--dark-blue);
+        color: white;
+    }
+
+    .badge-icon-large.gold {
+        background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+        color: white;
+    }
+
+    .badge-icon-large.locked {
+        background: #1e293b;
+        color: white;
+    }
+
+    .badge-name {
+        font-size: 0.85rem;
+        color: #6b7280;
+        font-weight: 600;
+    }
+
+    /* Interview Statistics */
+    .stats-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .stat-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--teal);
+    }
+
+    .average-score-badge {
+        display: inline-block;
+        padding: 10px 20px;
+        background: rgba(77, 187, 196, 0.1);
+        border: 2px solid var(--teal);
+        border-radius: 25px;
+        color: var(--teal);
+        font-weight: 700;
+        font-size: 1.1rem;
+    }
+
+    .chart-placeholder {
+        width: 100%;
+        height: 150px;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 150"><polyline points="10,120 50,90 90,100 130,70 170,80 210,50 250,60 290,30" fill="none" stroke="%234dbbc4" stroke-width="3"/><polyline points="10,150 10,120 50,90 90,100 130,70 170,80 210,50 250,60 290,30 290,150" fill="%234dbbc4" opacity="0.2"/></svg>');
+        background-size: cover;
+        background-position: center;
+    }
+
+    /* Resume & Documents */
+    .btn-upload {
+        background: var(--teal);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 12px 25px;
+        font-weight: 600;
+        transition: all 0.3s;
+        margin-bottom: 20px;
+    }
+
+    .btn-upload:hover {
+        background: var(--teal-dark);
+        transform: translateY(-2px);
+    }
+
+    .document-item {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 15px;
+        background: #f9fafb;
+        border-radius: 10px;
+    }
+
+    .document-icon {
+        font-size: 2rem;
+        color: var(--teal);
+    }
+
+    .document-info {
+        flex: 1;
+    }
+
+    .document-name {
+        font-weight: 600;
+        color: #2d3748;
+    }
+
+    .document-meta {
+        font-size: 0.85rem;
+        color: #9ca3af;
+    }
+
+    /* Save Button */
+    .btn-save {
+        background: var(--teal);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 15px 50px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        display: block;
+        margin: 30px auto 0;
+        transition: all 0.3s;
+    }
+
+    .btn-save:hover {
+        background: var(--teal-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(77, 187, 196, 0.4);
+    }
+
+    /* Bottom Nav */
+    .mobile-bottom-nav {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        padding: 10px 0;
+        z-index: 1000;
+    }
+
+    .bottom-nav-items {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .bottom-nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        color: #9ca3af;
+        text-decoration: none;
+        font-size: 0.75rem;
+    }
+
+    .bottom-nav-item.active {
+        color: var(--teal);
+    }
+
+    .bottom-nav-item i {
+        font-size: 1.5rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .sidebar {
+            display: none;
+        }
+
+        .main-content {
+            margin-left: 0;
+            padding: 0;
+        }
+
+        .mobile-bottom-nav {
+            display: block;
+        }
+
+        .desktop-profile-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .badges-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .tab-navigation {
+            justify-content: center;
+        }
+    }
+
+    @media (min-width: 769px) {
+        .mobile-container {
+            display: none;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .desktop-only {
+            display: none !important;
+        }
+    }
+</style>
+
+
+</head>
+<body>
+    <!-- Sidebar (Desktop) -->
+    <div class="sidebar">
+        <div class="logo-section">
+            <div class="logo-icon">
+                <i class="bi bi-lightning-charge"></i>
+            </div>
+            <div class="logo-text">God's Will</div>
+        </div>
+
+
+    <ul class="sidebar-menu">
+        <li>
+            <a href="dashboard.html">
+                <i class="bi bi-house"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <li>
+            <a href="dashboard.html">
+                <i class="bi bi-award"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="bi bi-camera-video"></i>
+                <span>Interviews</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="bi bi-trophy"></i>
+                <span>Badges</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" class="active">
+                <i class="bi bi-person"></i>
+                <span>Profile</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="bi bi-gear"></i>
+                <span>Settings</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<!-- Desktop Profile -->
+<div class="main-content desktop-only">
+    <div class="desktop-profile-grid">
+        <!-- Left Column: Profile & Badges -->
+        <div>
+            <!-- Profile Card -->
+            <div class="profile-card mb-4">
+                <div class="profile-header">
+                    <div class="profile-avatar-container">
+                        <div class="profile-avatar">
+                            <i class="bi bi-person-circle"></i>
+                        </div>
+                        <div class="edit-avatar-btn">
+                            <i class="bi bi-pencil"></i>
+                        </div>
+                    </div>
+                    <h2 class="profile-name">Jane Doe</h2>
+                    <p class="profile-subtitle">Aspiring Customer Service Representative</p>
+                </div>
+            </div>
+
+            <!-- Badges Earned -->
+            <div class="profile-card">
+                <h3 class="card-title mb-4">Badges Earned</h3>
+                <div class="badges-grid">
+                    <div class="badge-item">
+                        <div class="badge-icon-large star">
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                    </div>
+                    <div class="badge-item">
+                        <div class="badge-icon-large star">
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                    </div>
+                    <div class="badge-item">
+                        <div class="badge-icon-large star">
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                    </div>
+                    <div class="badge-item">
+                        <div class="badge-icon-large gold">
+                            <i class="bi bi-award-fill"></i>
+                        </div>
+                        <div class="badge-name">Top Performer</div>
+                    </div>
+                    <div class="badge-item">
+                        <div class="badge-icon-large gold">
+                            <i class="bi bi-trophy-fill"></i>
+                        </div>
+                        <div class="badge-name">Top Performer</div>
+                    </div>
+                    <div class="badge-item">
+                        <div class="badge-icon-large locked">
+                            <i class="bi bi-lock-fill"></i>
+                        </div>
+                        <div class="badge-name">Interview Ace</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Details, Stats, Resume -->
+        <div>
+            <!-- Personal Details -->
+            <div class="profile-card mb-4">
+                <div class="card-header">
+                    <h3 class="card-title">Personal Details</h3>
+                    <a href="login.html" class="btn-sign-out">
+                        <i class="bi bi-gear"></i>
+                        Sign Out
+                    </a>
+                </div>
+                <div class="detail-field">
+                    <div class="detail-label">Full Name</div>
+                    <div class="detail-value">Jane Doe</div>
+                </div>
+                <div class="detail-field">
+                    <div class="detail-label">Email Address</div>
+                    <div class="detail-value">
+                        jane.doe@email.com
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                        </label>
+                    </div>
+                </div>
+                <div class="detail-field">
+                    <div class="detail-label">Location</div>
+                    <div class="detail-value">Fiscation</div>
+                </div>
+                <div class="detail-field">
+                    <div class="detail-label">Bio / Summary</div>
+                    <div class="detail-value">Passionate about customer service...</div>
+                </div>
+            </div>
+
+            <!-- Interview Statistics -->
+            <div class="profile-card mb-4">
+                <h3 class="card-title mb-3">Interview Statistics</h3>
+                <div class="stats-header">
+                    <div>
+                        <div class="detail-label">Interviews Completed</div>
+                        <div class="stat-value">12</div>
+                    </div>
+                    <div class="average-score-badge">
+                        Average Score: 85%
+                    </div>
+                </div>
+                <div class="chart-placeholder"></div>
+            </div>
+
+            <!-- Resume & Documents -->
+            <div class="profile-card">
+                <h3 class="card-title mb-3">Resume & Documents</h3>
+                <button class="btn btn-upload">
+                    <i class="bi bi-upload me-2"></i>
+                    Upload New Resume
+                </button>
+                <div class="document-item">
+                    <i class="bi bi-file-earmark-text document-icon"></i>
+                    <div class="document-info">
+                        <div class="document-name">Upload Doe_Resume.pdf</div>
+                        <div class="document-meta">Uploaded Files</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Mobile Profile -->
+<div class="mobile-container d-md-none">
+    <!-- Profile Header -->
+    <div class="profile-header">
+        <div class="profile-avatar-container">
+            <div class="profile-avatar">
+                <i class="bi bi-person-circle"></i>
+            </div>
+            <div class="edit-avatar-btn">
+                <i class="bi bi-pencil"></i>
+            </div>
+        </div>
+        <h2 class="profile-name">Jane Doe</h2>
+        <p class="profile-subtitle">Aspiring Customer Service Rep</p>
+    </div>
+
+    <!-- Tab Navigation -->
+    <div class="tab-navigation">
+        <button class="tab-btn active">Overview</button>
+        <button class="tab-btn">Resume</button>
+        <button class="tab-btn">Badges</button>
+        <button class="tab-btn">History</button>
+    </div>
+
+    <!-- Profile Form -->
+    <div class="form-section">
+        <label class="form-label">Name</label>
+        <div class="form-value">Jane Doe</div>
+    </div>
+
+    <div class="form-section">
+        <label class="form-label">Bio</label>
+        <div class="form-value">Lome cunmer acrvice ed of divews ult</div>
+    </div>
+
+    <div class="form-section">
+        <label class="form-label">Email</label>
+        <div class="form-value">jane.doe@email.com</div>
+    </div>
+
+    <!-- Save Button -->
+    <button class="btn btn-save">Save Changes</button>
+</div>
+
+<!-- Mobile Bottom Navigation -->
+<div class="mobile-bottom-nav">
+    <div class="bottom-nav-items">
+        <a href="dashboard.html" class="bottom-nav-item">
+            <i class="bi bi-house"></i>
+            <span>Home</span>
+        </a>
+        <a href="#" class="bottom-nav-item active">
+            <i class="bi bi-person-fill"></i>
+            <span>Profile</span>
+        </a>
+        <a href="#" class="bottom-nav-item">
+            <i class="bi bi-gear"></i>
+            <span>Settings</span>
+        </a>
+        <a href="login.html" class="bottom-nav-item">
+            <i class="bi bi-box-arrow-right"></i>
+            <span>Logout</span>
+        </a>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Tab switching for mobile
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+</script>
+
+
+</body>
+</html>
